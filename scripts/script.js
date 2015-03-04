@@ -1,9 +1,11 @@
 $(function() {
+init();
+});
 	var cards = [
-	[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13], //spades
-	[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13], //hearts
-	[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13], //clubs
-	[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13] //diamonds
+	[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10], //spades
+	[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10], //hearts
+	[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10], //clubs
+	[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10] //diamonds
 	];
 	var blackjack = {};
 	blackjack.hand = [];
@@ -11,6 +13,7 @@ $(function() {
 	blackjack.playerScore = 0;
 	blackjack.dealerScore = 0;
 	blackjack.tempNumber = 0;
+	blackjack.twentyOne = 21;
 
 	blackjack.randomNumber = function(number){
 		randomNumber = Math.floor(Math.random() * number) +0;
@@ -19,7 +22,7 @@ $(function() {
 
 	blackjack.drawCard = function(x){
 	//choose random deck	
-		console.log("x",x);
+		// console.log("x",x);
 		var deck = blackjack.randomNumber(cards.length);
 		var card = blackjack.randomNumber(cards[deck].length);
 		card++	
@@ -51,25 +54,50 @@ $(function() {
 			blackjack.dealerScore = blackjack.dealerScore + blackjack.tempNumber;	
 		}
 
-		console.log("dealer cards are ",blackjack.dealerHand);
-		console.log("your current score is ", blackjack.dealerScore);
+		// console.log("dealer cards are ",blackjack.dealerHand);
+		// console.log("your current dealer score is ", blackjack.dealerScore);
 		
 	}
 	blackjack.hitMe = function(){
-		blackjack.drawCard(blackjack.hand);
-		console.log(blackjack.tempNumber);
-		blackjack.playerScore = blackjack.playerScore + blackjack.tempNumber;	
-		console.log("your current score is ", blackjack.playerScore);
-		if (blackjack.playerScore > 21){
-
-		}
-
+		$(".hitme").on("click", function(){
+			console.log("clicked");
+			blackjack.drawCard(blackjack.hand);
+			console.log(blackjack.tempNumber);
+			blackjack.playerScore = blackjack.playerScore + blackjack.tempNumber;	
+			console.log("your current score is ", blackjack.playerScore);
+			blackjack.overUnder(blackjack.playerScore, blackjack.twentyOne)
+		});
+	}
+	blackjack.overUnder = function (x, y) {
+		if (x > y) {
+			console.log("You have gone over 21! Your cards add up to " + blackjack.playerScore);
+		} 
 	}
 	blackjack.reset = function(){
-
+		$(".reset").on("click", function(){
+		console.log("reset clicked")	
+		cards = [
+		[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10], //spades
+		[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10], //hearts
+		[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10], //clubs
+		[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10] //diamonds
+		];
+		blackjack.hand = [];
+		blackjack.dealerHand = [];
+		blackjack.playerScore = 0;
+		blackjack.dealerScore = 0;
+		blackjack.tempNumber = 0;
+		blackjack.twentyOne = 21;	
+		blackjack.gameInit();
+		})
 	}
+	blackjack.gameInit = function(){
 	blackjack.playerInitialDeal();
 	blackjack.dealerInitialDeal();
-	// blackjack.hitMe();
-
-});
+		
+	}
+	init = function(){
+	blackjack.gameInit();
+	blackjack.hitMe();
+	blackjack.reset();
+	}
