@@ -132,4 +132,5 @@ legend, button::-moz-focus-inner, input::-moz-focus-inner {
   box-sizing: border-box; }
 
 a {
+  display: inline-block;
   padding: 5%; }

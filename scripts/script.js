@@ -73,9 +73,10 @@ init();
 		});
 	}
 	blackjack.dealerPlay = function(){
-		console.log("blackjack.dealerHand");
+		console.log(blackjack.dealerHand);
 		//as per Blackjack rules, the dealer draws cards until he reaches 17 or greater
-		for (var i = 0; i = 17; i++){
+		for (var i = 0; i >= 17; i++){
+			blackjack.drawCard(blackjack.dealerHand);
 			console.log(i);
 		}
 
@@ -84,13 +85,12 @@ init();
 	blackjack.overUnder = function (x, y) {
 		if (x > y) {
 			console.log("You have gone over 21! Your cards add up to " + blackjack.playerScore);
+			blackjack.reset();
 		} else if (x === y) {
 			console.log("you win!");
 		}
 	}
-	blackjack.reset = function(){
-		$(".reset").on("click", function(){
-		console.log("reset clicked")	
+	blackjack.reset = function (){
 		cards = [
 		[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10], //spades
 		[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10], //hearts
@@ -104,6 +104,11 @@ init();
 		blackjack.tempNumber = 0;
 		blackjack.twentyOne = 21;	
 		blackjack.gameInit();
+	}
+	blackjack.resetButton = function(){
+		$(".reset").on("click", function(){
+		blackjack.reset();
+	
 		})
 	}
 	blackjack.fold = function(){
@@ -121,5 +126,5 @@ init();
 	blackjack.gameInit();
 	blackjack.fold();
 	blackjack.hitMe();
-	blackjack.reset();
+	blackjack.resetButton();
 	}
