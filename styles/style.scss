@@ -5,7 +5,22 @@ input[type=reset],input[type=submit]{-webkit-appearance:button;cursor:pointer;}b
 
 * { -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box; }
 
-a {
-	display: inline-block;
-	padding: 5%;
+body {
+}
+.gamespace {
+	background-color: #009900;
+	min-height: 800px;
+	max-width: 1200px;
+	margin: 0 auto;
+.gameOptions{
+	li{
+	display: inline;	
+
+	a {
+		display: inline-block;
+		padding: 1%;
+	}
+		
+	}
+}
 }

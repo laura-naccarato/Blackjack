@@ -40,6 +40,7 @@ init();
 		}
 		array.push(card + " of " + deck);
 		blackjack.tempNumber = card;
+		
 	}
 
 	blackjack.playerInitialDeal = function(){	
@@ -73,13 +74,12 @@ init();
 		});
 	}
 	blackjack.dealerPlay = function(){
-		console.log(blackjack.dealerHand);
 		//as per Blackjack rules, the dealer draws cards until he reaches 17 or greater
-		for (var i = 0; i >= 17; i++){
+		while (blackjack.dealerScore <= 17){
 			blackjack.drawCard(blackjack.dealerHand);
-			console.log(i);
+			blackjack.dealerScore = blackjack.addToScore(blackjack.dealerScore);
 		}
-
+		console.log(blackjack.dealerScore);
 	}
 	//x referring to the score of either the dealer or player, y being 21
 	blackjack.overUnder = function (x, y) {
@@ -114,13 +114,19 @@ init();
 	blackjack.fold = function(){
 		$(".fold").on("click", function(){
 			blackjack.dealerPlay();
-		
+			blackjack.winnerCalculation();	
 		});
+	}
+	blackjack.winnerCalculation = function() {
+		if (blackjack.dealerScore > blackjack.playerScore && blackjack.dealerScore <=21 ){
+			console.log("dealer wins! score: " + blackjack.dealerScore);	
+		}	else {
+			console.log("You Win! score: " + blackjack.playerScore);
+		}
 	}
 	blackjack.gameInit = function(){
 	blackjack.playerInitialDeal();
 	blackjack.dealerInitialDeal();
-		
 	}
 	init = function(){
 	blackjack.gameInit();
