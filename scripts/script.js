@@ -30,15 +30,15 @@ init();
 		var tempCard = blackjack.randomNumber((cards[deck].length-1));
 		var card = cards[deck][tempCard];
 		if (deck === 0)	{
-			deck = "spades";
+			deck = "♠";
 		} else if (deck === 1){
-			deck = "hearts";
+			deck = "♥";
 		} else if (deck === 2){
-			deck = "diamonds"
+			deck = "♦"
 		} else if(deck === 3){
-			deck = "clubs";
+			deck = "♣";
 		}
-		array.push(card + " of " + deck);
+		array.push(card + deck);
 		blackjack.tempNumber = card;
 		
 	}
@@ -51,6 +51,7 @@ init();
 		}
 
 		console.log("your cards are ", blackjack.hand);
+		
 		console.log("Player score is ", blackjack.playerScore);
 	}
 	blackjack.dealerInitialDeal = function(){
