@@ -48,11 +48,18 @@ init();
 	}
 	blackjack.printCard = function (hand, i, location){
 		if (hand[i].red === true){
-			card = $("<h2 class = 'playingCardRed'>").text(hand[i].card + " " + blackjack.hand[i].deck);
-			$(location).append(card);
+			suite = $("<p class = cardSuiteRed>").text(blackjack.hand[i].deck);
+			card = $("<p class = 'playingCardNumberRed'>").text(hand[i].card);
+			card2 = $("<p class = 'playingCardNumberRed'>").text(hand[i].card);
+			playingCard = $("<p class = 'playingCard'>").append(card, suite, card2);
+			$(location).append(playingCard);
 		} else {
-			card = $("<h2 class = 'playingCardBlack'>").text(hand[i].card + " " + blackjack.hand[i].deck);
-			$(location).append(card);
+			suite = $("<p class = cardSuiteBlack>").text(blackjack.hand[i].deck)
+			card = $("<p class = 'playingCardNumberBlack'>").text(hand[i].card);
+			card2 = $("<p class = 'playingCardNumberBlack'>").text(hand[i].card);
+			playingCard = $("<p class = 'playingCard'>").append(card, suite, card2);
+
+			$(location).append(playingCard);
 		}
 	}
 	blackjack.playerInitialDeal = function(){	
@@ -81,7 +88,6 @@ init();
 			blackjack.playerScore = blackjack.addToScore(blackjack.playerScore);
 			console.log("your current score is ", blackjack.playerScore);
 			blackjack.overUnder(blackjack.playerScore, blackjack.twentyOne)
-			blackjack.printCard(blackjack.hand, (blackjack.hand.length -1), ".playerHand");
 		});
 	}
 	blackjack.dealerPlay = function(){
@@ -99,6 +105,8 @@ init();
 			blackjack.reset();
 		} else if (x === y) {
 			console.log("you win!");
+		} else {
+			blackjack.printCard(blackjack.hand, (blackjack.hand.length -1), ".playerHand");
 		}
 	}
 	blackjack.reset = function (){
