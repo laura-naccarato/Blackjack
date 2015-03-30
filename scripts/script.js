@@ -31,38 +31,47 @@ init();
 		var card = cards[deck][tempCard];
 		if (deck === 0)	{
 			deck = "♠";
+			array.push({card: card, deck:deck, red:false});
 		} else if (deck === 1){
 			deck = "♥";
+			array.push({card: card, deck:deck, red:true});
 		} else if (deck === 2){
 			deck = "♦"
+			array.push({card: card, deck:deck, red:true});
 		} else if(deck === 3){
 			deck = "♣";
+			array.push({card: card, deck:deck, red:false});
 		}
-		array.push(card + deck);
+		// array.push({card: card, deck:deck});
 		blackjack.tempNumber = card;
-		
-	}
 
+	}
+	blackjack.printCard = function (hand, i, location){
+		if (hand[i].red === true){
+			card = $("<h2 class = 'playingCardRed'>").text(hand[i].card + " " + blackjack.hand[i].deck);
+			$(location).append(card);
+		} else {
+			card = $("<h2 class = 'playingCardBlack'>").text(hand[i].card + " " + blackjack.hand[i].deck);
+			$(location).append(card);
+		}
+	}
 	blackjack.playerInitialDeal = function(){	
 		for (var i = 0; i < 2; i++)	{
 			blackjack.drawCard(blackjack.hand);
 			blackjack.playerScore = blackjack.addToScore(blackjack.playerScore);
-			
+			blackjack.printCard(blackjack.hand, i, ".playerHand");
 		}
-
 		console.log("your cards are ", blackjack.hand);
-		
 		console.log("Player score is ", blackjack.playerScore);
 	}
 	blackjack.dealerInitialDeal = function(){
+			var suite = "";
+			var cardValue= "";	
 			for (var i = 0; i < 2; i++)	{
 			blackjack.drawCard(blackjack.dealerHand);
-			blackjack.dealerScore = blackjack.addToScore(blackjack.dealerScore);	
-		}
+			blackjack.dealerScore = blackjack.addToScore(blackjack.dealerScore);
 
-		// console.log("dealer cards are ",blackjack.dealerHand);
-		// console.log("your current dealer score is ", blackjack.dealerScore);
-		
+		}
 	}
 	blackjack.hitMe = function(){
 		$(".hitme").on("click", function(){
@@ -72,6 +81,7 @@ init();
 			blackjack.playerScore = blackjack.addToScore(blackjack.playerScore);
 			console.log("your current score is ", blackjack.playerScore);
 			blackjack.overUnder(blackjack.playerScore, blackjack.twentyOne)
+			blackjack.printCard(blackjack.hand, (blackjack.hand.length -1), ".playerHand");
 		});
 	}
 	blackjack.dealerPlay = function(){
@@ -92,6 +102,7 @@ init();
 		}
 	}
 	blackjack.reset = function (){
+		$(".playerHand").text("");
 		cards = [
 		[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10], //spades
 		[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10], //hearts
@@ -125,6 +136,7 @@ init();
 			console.log("You Win! score: " + blackjack.playerScore);
 		}
 	}
+
 	blackjack.gameInit = function(){
 	blackjack.playerInitialDeal();
 	blackjack.dealerInitialDeal();
