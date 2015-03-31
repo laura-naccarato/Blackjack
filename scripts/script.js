@@ -20,10 +20,14 @@ init();
 		randomNumber = Math.floor(Math.random() * number) +0;
 		return randomNumber;
 	}
-
 	blackjack.addToScore = function(score){
 		score = score + blackjack.tempNumber;
 		return score;
+	}
+	blackjack.scoreBoard = function(){
+		$(".playerScore").html("");
+		$(".playerScore").append(blackjack.playerScore);
+
 	}
 	blackjack.drawCard = function(array){
 		var deck = blackjack.randomNumber(cards.length);
@@ -68,6 +72,7 @@ init();
 			blackjack.playerScore = blackjack.addToScore(blackjack.playerScore);
 			blackjack.printCard(blackjack.hand, i, ".playerHand");
 		}
+		blackjack.scoreBoard();
 		console.log("your cards are ", blackjack.hand);
 		console.log("Player score is ", blackjack.playerScore);
 	}
@@ -88,6 +93,7 @@ init();
 			blackjack.playerScore = blackjack.addToScore(blackjack.playerScore);
 			console.log("your current score is ", blackjack.playerScore);
 			blackjack.overUnder(blackjack.playerScore, blackjack.twentyOne)
+			blackjack.scoreBoard();
 		});
 	}
 	blackjack.dealerPlay = function(){
