@@ -2,10 +2,10 @@ $(function() {
 init();
 });
 	var cards = [
-	[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10], //spades
-	[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10], //hearts
-	[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10], //clubs
-	[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10] //diamonds
+	["A", 2, 3, 4, 5, 6, 7, 8, 9, "J", "Q", "k"], //spades
+	["A", 2, 3, 4, 5, 6, 7, 8, 9, "J", "Q", "k"], //hearts
+	["A", 2, 3, 4, 5, 6, 7, 8, 9, "J", "Q", "k"], //clubs
+	["A", 2, 3, 4, 5, 6, 7, 8, 9, "J", "Q", "k"] //diamonds
 	];
 	var blackjack = {};
 	blackjack.hand = [];
@@ -20,6 +20,14 @@ init();
 		randomNumber = Math.floor(Math.random() * number) +0;
 		return randomNumber;
 	}
+	blackjack.start = function() {
+		$(".start").on("click", function(e){
+
+			e.preventDefault();
+			$(".startScreen").html("");
+			$(".activeGameSpace").toggleClass("hide");
+		});
+	}
 	blackjack.addToScore = function(score){
 		score = score + blackjack.tempNumber;
 		return score;
@@ -27,12 +35,12 @@ init();
 	blackjack.scoreBoard = function(){
 		$(".playerScore").html("");
 		$(".playerScore").append(blackjack.playerScore);
-
 	}
 	blackjack.drawCard = function(array){
 		var deck = blackjack.randomNumber(cards.length);
 		var tempCard = blackjack.randomNumber((cards[deck].length-1));
 		var card = cards[deck][tempCard];
+		console.log(card);
 		if (deck === 0)	{
 			deck = "♠";
 			array.push({card: card, deck:deck, red:false});
@@ -46,7 +54,7 @@ init();
 			deck = "♣";
 			array.push({card: card, deck:deck, red:false});
 		}
-		// array.push({card: card, deck:deck});
+
 		blackjack.tempNumber = card;
 
 	}
@@ -66,15 +74,25 @@ init();
 			$(location).append(playingCard);
 		}
 	}
+	blackjack.convertLetters = function(i){
+		if (blackjack.hand[i].card === "J" || blackjack.hand[i].card === "Q" || blackjack.hand[i].card=== "K"){
+			blackjack.hand[i].card = 10;
+			blackjack.playerScore = blackjack.addToScore(blackjack.playerScore);
+		} else if (blackjack.hand[i].card === "A") {
+			blackjack.hand[i].card = 1;
+			blackjack.playerScore = blackjack.addToScore(blackjack.playerScore);
+		} else {
+			blackjack.playerScore = blackjack.addToScore(blackjack.playerScore);
+		}
+	}
 	blackjack.playerInitialDeal = function(){	
 		for (var i = 0; i < 2; i++)	{
 			blackjack.drawCard(blackjack.hand);
-			blackjack.playerScore = blackjack.addToScore(blackjack.playerScore);
 			blackjack.printCard(blackjack.hand, i, ".playerHand");
+			blackjack.convertLetters(i);
 		}
-		blackjack.scoreBoard();
-		console.log("your cards are ", blackjack.hand);
-		console.log("Player score is ", blackjack.playerScore);
+			blackjack.scoreBoard();
+		
 	}
 	blackjack.dealerInitialDeal = function(){
 			var suite = "";
@@ -87,11 +105,8 @@ init();
 	}
 	blackjack.hitMe = function(){
 		$(".hitme").on("click", function(){
-			console.log("clicked");
 			blackjack.drawCard(blackjack.hand);
-			console.log(blackjack.tempNumber);
 			blackjack.playerScore = blackjack.addToScore(blackjack.playerScore);
-			console.log("your current score is ", blackjack.playerScore);
 			blackjack.overUnder(blackjack.playerScore, blackjack.twentyOne)
 			blackjack.scoreBoard();
 		});
@@ -156,6 +171,7 @@ init();
 	blackjack.dealerInitialDeal();
 	}
 	init = function(){
+	blackjack.start();
 	blackjack.gameInit();
 	blackjack.fold();
 	blackjack.hitMe();

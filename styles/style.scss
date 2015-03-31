@@ -7,6 +7,32 @@ input[type=reset],input[type=submit]{-webkit-appearance:button;cursor:pointer;}b
 
 body {
 }
+.hide {
+	display: none;
+}
+.startScreen{
+	text-align: center;
+	padding-top: 3%;
+	h1 {
+		font-size: 3rem;
+	}
+	a{	
+		margin-top: 3%;
+		text-decoration: none;
+		display: inline-block;
+		color: black;
+		background-color: rgba(white, 0.7);
+		border-radius: 5px;
+		padding: 2%;
+		border: 1px solid rgba(black, 0.5);
+		&:hover {
+			background: rgba(grey, 0.5);	
+		}
+	}
+}
+.instructions {
+	padding-top: 3%;
+}
 .playingCard {
 	font-size: 20px;
 	text-align: center;
@@ -16,8 +42,8 @@ body {
 	margin: 0 2%;
 	display: inline-block;
 	background: white;
+	border: 1.5px solid black;
 	&:hover {
-		webkit-animation: wiggle 3s;
 	}
 }
 .cardSuiteRed, .playingCardNumberRed {
@@ -52,29 +78,3 @@ body {
 
 // animations
 
-@-webkit-keyframes wiggle { 
-    0% { -webkit-transform: skewX(9deg); } 
-    10% { -webkit-transform: skewX(-8deg); } 
-    20% { -webkit-transform: skewX(7deg); } 
-    30% { -webkit-transform: skewX(-6deg); } 
-    40% { -webkit-transform: skewX(5deg); } 
-    50% { -webkit-transform: skewX(-4deg); } 
-    60% { -webkit-transform: skewX(3deg); } 
-    70% { -webkit-transform: skewX(-2deg); } 
-    80% { -webkit-transform: skewX(1deg); } 
-    90% { -webkit-transform: skewX(0deg); } 
-    100% { -webkit-transform: skewX(0deg); } 
-} 
-@keyframes wiggle { 
-    0% { transform: skewX(9deg); } 
-    10% { transform: skewX(-8deg); } 
-    20% { transform: skewX(7deg); } 
-    30% { transform: skewX(-6deg); } 
-    40% { transform: skewX(5deg); } 
-    50% { transform: skewX(-4deg); } 
-    60% { transform: skewX(3deg); } 
-    70% { transform: skewX(-2deg); } 
-    80% { transform: skewX(1deg); } 
-    90% { transform: skewX(0deg); } 
-    100% { transform: skewX(0deg); } 
-} 

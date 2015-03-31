@@ -11,13 +11,29 @@ body
 			li About
 			li Contact
 	section.gamespace
-		.scoreBoard
-			p Your Score: 	
-			p.playerScore
-		ul.gameOptions
-			li: a(href="#" class= "hitme") hit me
-			li: a(href="#" class= "reset") reset
-			li: a(href="#" class= "fold") fold
-		.playerHand
+		.startScreen
+			h1 BlackJack
+			.instructions
+				h2 Instructions:
+				p The goal of the game is to reach 21 without going over. 
+				p Press "hit me" To deal another card.
+				p If you don't want to deal any more cards, press "Fold" to see who won!
+				p If you don't like your hand, press reset
+
+			a(href="#" class="start") Get Started!
+		.gameResultPage
+
+		.activeGameSpace.hide
+			.scoreBoard
+				p Your Score: 	
+				p.playerScore
+				p Dealers Hand 
+				p.dealerHand
+
+			ul.gameOptions
+				li: a(href="#" class= "hitme") hit me
+				li: a(href="#" class= "reset") reset
+				li: a(href="#" class= "fold") fold
+			.playerHand
 
 	script(src="../scripts/script.js")

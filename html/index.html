@@ -14,16 +14,31 @@
     </ul>
   </header>
   <section class="gamespace">
-    <div class="scoreBoard">
-      <p>Your Score: 	</p>
-      <p class="playerScore"></p>
+    <div class="startScreen">
+      <h1>BlackJack</h1>
+      <div class="instructions">
+        <h2>Instructions:</h2>
+        <p>The goal of the game is to reach 21 without going over. </p>
+        <p>Press "hit me" To deal another card.</p>
+        <p>If you don't want to deal any more cards, press "Fold" to see who won!</p>
+        <p>If you don't like your hand, press reset</p>
+      </div><a href="#" class="start">Get Started!</a>
     </div>
-    <ul class="gameOptions">
-      <li><a href="#" class="hitme">hit me</a></li>
-      <li><a href="#" class="reset">reset</a></li>
-      <li><a href="#" class="fold">fold</a></li>
-    </ul>
-    <div class="playerHand"></div>
+    <div class="gameResultPage"></div>
+    <div class="activeGameSpace hide">
+      <div class="scoreBoard">
+        <p>Your Score: 	</p>
+        <p class="playerScore"></p>
+        <p>Dealers Hand </p>
+        <p class="dealerHand"></p>
+      </div>
+      <ul class="gameOptions">
+        <li><a href="#" class="hitme">hit me</a></li>
+        <li><a href="#" class="reset">reset</a></li>
+        <li><a href="#" class="fold">fold</a></li>
+      </ul>
+      <div class="playerHand"></div>
+    </div>
   </section>
   <script src="../scripts/script.js"></script>
 </body>
