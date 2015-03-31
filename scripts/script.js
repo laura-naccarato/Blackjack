@@ -2,10 +2,10 @@ $(function() {
 init();
 });
 	var cards = [
-	["A", 2, 3, 4, 5, 6, 7, 8, 9, "J", "Q", "k"], //spades
-	["A", 2, 3, 4, 5, 6, 7, 8, 9, "J", "Q", "k"], //hearts
-	["A", 2, 3, 4, 5, 6, 7, 8, 9, "J", "Q", "k"], //clubs
-	["A", 2, 3, 4, 5, 6, 7, 8, 9, "J", "Q", "k"] //diamonds
+	[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10], //spades
+	[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10], //hearts
+	[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10], //clubs
+	[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10] //diamonds
 	];
 	var blackjack = {};
 	blackjack.hand = [];
@@ -60,36 +60,36 @@ init();
 	}
 	blackjack.printCard = function (hand, i, location){
 		if (hand[i].red === true){
-			suite = $("<p class = cardSuiteRed>").text(blackjack.hand[i].deck);
-			card = $("<p class = 'playingCardNumberRed'>").text(hand[i].card);
-			card2 = $("<p class = 'playingCardNumberRed'>").text(hand[i].card);
-			playingCard = $("<p class = 'playingCard'>").append(card, suite, card2);
+			var suite = $("<p class = cardSuiteRed>").text(blackjack.hand[i].deck);
+			var card = $("<p class = 'playingCardNumberRed'>").text(hand[i].card);
+			var card2 = $("<p class = 'playingCardNumberRed'>").text(hand[i].card);
+			var playingCard = $("<p class = 'playingCard'>").append(card, suite, card2);
 			$(location).append(playingCard);
 		} else {
-			suite = $("<p class = cardSuiteBlack>").text(blackjack.hand[i].deck)
-			card = $("<p class = 'playingCardNumberBlack'>").text(hand[i].card);
-			card2 = $("<p class = 'playingCardNumberBlack'>").text(hand[i].card);
-			playingCard = $("<p class = 'playingCard'>").append(card, suite, card2);
+			var suite = $("<p class = cardSuiteBlack>").text(blackjack.hand[i].deck)
+			var card = $("<p class = 'playingCardNumberBlack'>").text(hand[i].card);
+			var card2 = $("<p class = 'playingCardNumberBlack'>").text(hand[i].card);
+			var playingCard = $("<p class = 'playingCard'>").append(card, suite, card2);
 
 			$(location).append(playingCard);
 		}
 	}
-	blackjack.convertLetters = function(i){
-		if (blackjack.hand[i].card === "J" || blackjack.hand[i].card === "Q" || blackjack.hand[i].card=== "K"){
-			blackjack.hand[i].card = 10;
-			blackjack.playerScore = blackjack.addToScore(blackjack.playerScore);
-		} else if (blackjack.hand[i].card === "A") {
-			blackjack.hand[i].card = 1;
-			blackjack.playerScore = blackjack.addToScore(blackjack.playerScore);
-		} else {
-			blackjack.playerScore = blackjack.addToScore(blackjack.playerScore);
-		}
-	}
+	// blackjack.convertLetters = function(i){
+	// 	if (blackjack.hand[i].card === "J" || blackjack.hand[i].card === "Q" || blackjack.hand[i].card=== "K"){
+	// 		blackjack.hand[i].card = 10;
+	// 		blackjack.playerScore = blackjack.addToScore(blackjack.playerScore);
+	// 	} else if (blackjack.hand[i].card === "A") {
+	// 		blackjack.hand[i].card = 1;
+	// 		blackjack.playerScore = blackjack.addToScore(blackjack.playerScore);
+	// 	} else {
+	// 		blackjack.playerScore = blackjack.addToScore(blackjack.playerScore);
+	// 	}
+	// }
 	blackjack.playerInitialDeal = function(){	
 		for (var i = 0; i < 2; i++)	{
 			blackjack.drawCard(blackjack.hand);
 			blackjack.printCard(blackjack.hand, i, ".playerHand");
-			blackjack.convertLetters(i);
+			blackjack.playerScore = blackjack.addToScore(blackjack.playerScore);
 		}
 			blackjack.scoreBoard();
 		
@@ -111,6 +111,11 @@ init();
 			blackjack.scoreBoard();
 		});
 	}
+	blackjack.toggleResult = function (){
+		$(".gameResultPage").html("")
+		$(".gameResultPage").toggleClass("hide");
+		$(".activeGameSpace").toggleClass("hide");
+	}
 	blackjack.dealerPlay = function(){
 		//as per Blackjack rules, the dealer draws cards until he reaches 17 or greater
 		while (blackjack.dealerScore <= 17){
@@ -122,10 +127,18 @@ init();
 	//x referring to the score of either the dealer or player, y being 21
 	blackjack.overUnder = function (x, y) {
 		if (x > y) {
-			console.log("You have gone over 21! Your cards add up to " + blackjack.playerScore);
-			blackjack.reset();
+			blackjack.toggleResult();
+			var h2 = $("<h2 class='resultText'>").text("You lose!");
+			var p = $("<p class='resultText'>").text("You went over 21!");
+			var a = $("<a href='#' class = 'resetResult resultText'>").text("Try Again?");
+			$(".gameResultPage").append(h2, p, a);
 		} else if (x === y) {
-			console.log("you win!");
+			blackjack.toggleResult();
+			var h2 = $("<h2 class='resultText'>").text("You Win!");
+			var p = $("<p class='resultText'>").text("Your cards add up to 21! Wow, you must feel like a real winner!");
+			var a = $("<a href='#' class = 'resetResult resultText'>").text("Try Again?");
+			$(".gameResultPage").append(h2, p, a);
+
 		} else {
 			blackjack.printCard(blackjack.hand, (blackjack.hand.length -1), ".playerHand");
 		}
@@ -149,6 +162,13 @@ init();
 	blackjack.resetButton = function(){
 		$(".reset").on("click", function(){
 		blackjack.reset();
+	
+		})
+	}
+	blackjack.resetButtonResult = function(){
+		$("body").on("click", ".resetResult", function(){
+		blackjack.reset();
+		blackjack.toggleResult();
 	
 		})
 	}
@@ -176,4 +196,5 @@ init();
 	blackjack.fold();
 	blackjack.hitMe();
 	blackjack.resetButton();
+	blackjack.resetButtonResult();
 	}

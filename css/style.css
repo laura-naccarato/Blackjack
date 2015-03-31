@@ -166,10 +166,10 @@ legend, button::-moz-focus-inner, input::-moz-focus-inner {
   border: 1.5px solid black; }
 
 .cardSuiteRed, .playingCardNumberRed {
+  cursor: initial;
   color: red; }
 
 .gamespace {
-  background-color: #009900;
   min-height: 800px;
   max-width: 1200px;
   margin: 0 auto; }
@@ -188,3 +188,8 @@ legend, button::-moz-focus-inner, input::-moz-focus-inner {
         background: white;
         display: inline-block;
         padding: 1%; }
+
+.scoreBoard p {
+  display: inline-block;
+  float: left;
+  margin-right: 1%; }

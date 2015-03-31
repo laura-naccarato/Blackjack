@@ -11,8 +11,8 @@ body
 			li About
 			li Contact
 	section.gamespace
+		h1 BlackJack
 		.startScreen
-			h1 BlackJack
 			.instructions
 				h2 Instructions:
 				p The goal of the game is to reach 21 without going over. 
@@ -21,14 +21,14 @@ body
 				p If you don't like your hand, press reset
 
 			a(href="#" class="start") Get Started!
-		.gameResultPage
+		.gameResultPage.hide
 
 		.activeGameSpace.hide
-			.scoreBoard
+			.scoreBoard.clearfix
 				p Your Score: 	
 				p.playerScore
 				p Dealers Hand 
-				p.dealerHand
+				p.dealerHand resr
 
 			ul.gameOptions
 				li: a(href="#" class= "hitme") hit me

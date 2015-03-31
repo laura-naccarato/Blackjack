@@ -43,14 +43,13 @@ body {
 	display: inline-block;
 	background: white;
 	border: 1.5px solid black;
-	&:hover {
-	}
 }
 .cardSuiteRed, .playingCardNumberRed {
+	cursor: initial;
 	color: red;
 }
 .gamespace {
-	background-color: #009900;
+	// background-color: #009900;
 	min-height: 800px;
 	max-width: 1200px;
 	margin: 0 auto;
@@ -75,6 +74,17 @@ body {
 		}
 	}
 }
+.scoreBoard {
+	p{
+		display: inline-block;
+		float: left;
+		margin-right: 1%;
+	}
+	.playerScore{
+	}
+	.dealersHand {
 
+	}
+}
 // animations
 
